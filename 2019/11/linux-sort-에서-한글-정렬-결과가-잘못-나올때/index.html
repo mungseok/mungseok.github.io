@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.59.1 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="mungseok">
+<meta name="keywords" content="linux, 리눅스, sort, 정렬, collate">
+<meta name="description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
+이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+
+
+<meta property="og:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
+이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux sort 에서 한글 정렬 결과가 잘못 나올때">
+<meta name="twitter:title" content="linux sort 에서 한글 정렬 결과가 잘못 나올때">
+<meta property="og:url" content="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+<meta property="twitter:url" content="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+<meta property="og:site_name" content="mungseok&#39;s blog">
+<meta property="og:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
+이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta name="twitter:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
+이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta property="og:locale" content="ko-kr">
+
+  
+    <meta property="article:published_time" content="2019-11-11T20:38:37">
+  
+  
+    <meta property="article:modified_time" content="2019-11-11T20:38:37">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+      <meta property="article:section" content="command">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux">
+    
+      <meta property="article:tag" content="command">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://mungseok.github.io/images/my_pic.jpeg">
+  <meta property="twitter:image" content="https://mungseok.github.io/images/my_pic.jpeg">
+
+
+    <title>linux sort 에서 한글 정렬 결과가 잘못 나올때</title>
+
+    <link rel="icon" href="https://mungseok.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://mungseok.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-151750348-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://mungseok.github.io/">mungseok&#39;s blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://mungseok.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://mungseok.github.io/images/my_pic.jpeg" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://mungseok.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://mungseok.github.io/images/my_pic.jpeg" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">mungseok</h4>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/mungseok" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mungseok.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux sort 에서 한글 정렬 결과가 잘못 나올때
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-11-11T20:38:37&#43;09:00">
+        
+   11, 2019
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="https://mungseok.github.io/categories/linux">linux</a>, 
+    
+      <a class="category-link" href="https://mungseok.github.io/categories/command">command</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>한글이 섞여 있는 파일을 <a href="http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation">sort</a>로 정렬할때 결과의 순서가 이상할때가 있다.<br />
+이런경우 <code>LC_COLLATE</code> 환경변수를 바꿔서 한글순서 정렬이 가능하다.</p>
+
+<p>(<code>LC_ALL</code>은 <code>LC_*</code>계열 환경변수를 모두 바꾸므로 <code>LC_ALL</code>에 설정해도 무방)</p>
+
+<p>한글 UTF-8 기준으로 정렬하려면 <code>LC_COLLATE=&quot;ko_KR.utf8&quot;</code>로 설정하면 된다.</p>
+
+<pre><code class="language-bash"># centos 7.2, GNU coreutils 8.22
+
+$ cat text
+바d
+가l
+자e
+사m
+다n
+하g
+나j
+파h
+타c
+카f
+아i
+차b
+마k
+라a
+
+$ sort text
+라a
+차b
+타c
+바d
+자e
+카f
+하g
+파h
+아i
+나j
+마k
+가l
+사m
+다n
+
+$ C_COLLATE=&quot;ko_KR.UTF-8&quot; sort text
+가l
+나j
+다n
+라a
+마k
+바d
+사m
+아i
+자e
+차b
+카f
+타c
+파h
+하g
+
+$ LC_COLLATE=&quot;C&quot; sort text
+가l
+나j
+다n
+라a
+마k
+바d
+사m
+아i
+자e
+차b
+카f
+타c
+파h
+하g
+</code></pre>
+
+<p><code>LC_COLLATE</code>를 <code>C</code>,<code>POSIX</code>로 설정하면 <code>strcmp</code> 기준으로 정렬을 하는데<br />
+한글만 포함된경우 문제가 없으나 영문 대소문자도 아스키코드 기준으로 정렬하니 주의해야 한다.</p>
+
+<pre><code>$ cat en
+a
+C
+D
+b
+A
+d
+
+$ sort en # LC_COLLATE=&quot;en_US.UTF-8&quot;
+a
+A
+b
+C
+d
+D
+
+$ LC_COLLATE='posix' sort en
+A
+C
+D
+a
+b
+d
+</code></pre>
+
+<p>추가로 macOS 에서는 위 <code>LC_COLLCATE=ko_KR.UTF-8</code> 적용이 안되고 <code>C</code>, <code>POSIX</code>로도 안되는데&hellip;<br />
+비정상 locale 값을 적어서 <code>strcmp</code> 기준으로 정렬은 가능하다.</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/linux/">linux</a>
+
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/command/">command</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/" data-tooltip="typescript의 type guard">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 mungseok. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/" data-tooltip="typescript의 type guard">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmungseok.github.io%2F2019%2F11%2Flinux-sort-%25EC%2597%2590%25EC%2584%259C-%25ED%2595%259C%25EA%25B8%2580-%25EC%25A0%2595%25EB%25A0%25AC-%25EA%25B2%25B0%25EA%25B3%25BC%25EA%25B0%2580-%25EC%259E%2598%25EB%25AA%25BB-%25EB%2582%2598%25EC%2598%25AC%25EB%2595%258C%2F">
+          <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fmungseok.github.io%2F2019%2F11%2Flinux-sort-%25EC%2597%2590%25EC%2584%259C-%25ED%2595%259C%25EA%25B8%2580-%25EC%25A0%2595%25EB%25A0%25AC-%25EA%25B2%25B0%25EA%25B3%25BC%25EA%25B0%2580-%25EC%259E%2598%25EB%25AA%25BB-%25EB%2582%2598%25EC%2598%25AC%25EB%2595%258C%2F">
+          <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://mungseok.github.io/images/my_pic.jpeg" alt="" />
+    
+    <h4 id="about-card-name">mungseok</h4>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Republic of Korea
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://mungseok.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://mungseok.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/mungseok.github.io\/2019\/11\/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C\/';
+          
+            this.page.identifier = '\/2019\/11\/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'mungseok-blog';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

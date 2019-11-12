@@ -6,26 +6,35 @@
     <description>Recent content in Tags on mungseok&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 06 Nov 2019 12:56:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 12 Nov 2019 21:06:08 +0900</lastBuildDate>
     
 	<atom:link href="https://mungseok.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>tag1</title>
-      <link>https://mungseok.github.io/tags/tag1/</link>
-      <pubDate>Wed, 06 Nov 2019 12:56:30 +0900</pubDate>
+      <title>typescript</title>
+      <link>https://mungseok.github.io/tags/typescript/</link>
+      <pubDate>Tue, 12 Nov 2019 21:06:08 +0900</pubDate>
       
-      <guid>https://mungseok.github.io/tags/tag1/</guid>
+      <guid>https://mungseok.github.io/tags/typescript/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>tag2</title>
-      <link>https://mungseok.github.io/tags/tag2/</link>
-      <pubDate>Wed, 06 Nov 2019 12:56:30 +0900</pubDate>
+      <title>command</title>
+      <link>https://mungseok.github.io/tags/command/</link>
+      <pubDate>Mon, 11 Nov 2019 20:38:37 +0900</pubDate>
       
-      <guid>https://mungseok.github.io/tags/tag2/</guid>
+      <guid>https://mungseok.github.io/tags/command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://mungseok.github.io/tags/linux/</link>
+      <pubDate>Mon, 11 Nov 2019 20:38:37 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/linux/</guid>
       <description></description>
     </item>
     

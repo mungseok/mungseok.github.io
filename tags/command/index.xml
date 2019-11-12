@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>command on mungseok&#39;s blog</title>
+    <link>https://mungseok.github.io/tags/command/</link>
+    <description>Recent content in command on mungseok&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Mon, 11 Nov 2019 20:38:37 +0900</lastBuildDate>
+    
+	<atom:link href="https://mungseok.github.io/tags/command/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>linux sort 에서 한글 정렬 결과가 잘못 나올때</title>
+      <link>https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/</link>
+      <pubDate>Mon, 11 Nov 2019 20:38:37 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/</guid>
+      <description>&lt;p&gt;한글이 섞여 있는 파일을 &lt;a href=&#34;http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation&#34;&gt;sort&lt;/a&gt;로 정렬할때 결과의 순서가 이상할때가 있다.&lt;br /&gt;
+이런경우 &lt;code&gt;LC_COLLATE&lt;/code&gt; 환경변수를 바꿔서 한글순서 정렬이 가능하다.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

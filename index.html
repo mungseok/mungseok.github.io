@@ -170,21 +170,11 @@ if (!doNotTrack) {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/kakawait" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/mungseok" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
       <span class="sidebar-button-desc">GitHub</span>
-    </a>
-  </li>
-
-  <li class="sidebar-button">
-    
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/636472/kakawait" target="_blank" rel="noopener">
-    
-      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
-      
-      <span class="sidebar-button-desc">Stack Overflow</span>
     </a>
   </li>
 
@@ -233,16 +223,16 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://mungseok.github.io/2019/11/test/">
-          Test
+        <a class="link-unstyled" href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/">
+          typescript의 type guard
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-11-06T12:56:30&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-11-12T21:06:08&#43;09:00">
         
-   6, 2019
+   12, 2019
 
       </time>
     
@@ -251,9 +241,7 @@ if (!doNotTrack) {
   
     <span></span>
     
-      <a class="category-link" href="https://mungseok.github.io/categories/category">category</a>, 
-    
-      <a class="category-link" href="https://mungseok.github.io/categories/subcategory">subcategory</a>
+      <a class="category-link" href="https://mungseok.github.io/categories/typescript">typescript</a>
     
   
 
@@ -262,10 +250,73 @@ if (!doNotTrack) {
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
       
-        
+        <!--toc-->
+
+<p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">union type</a>인 객체를 사용할떄
+공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
+해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 <code>type guard</code>를 사용하여 안전하게 접근이 가능하다.</p>
       
       <p>
-        <a href="https://mungseok.github.io/2019/11/test/" class="postShorten-excerpt_link link"></a>
+        <a href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/" class="postShorten-excerpt_link link"></a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+          linux sort 에서 한글 정렬 결과가 잘못 나올때
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-11-11T20:38:37&#43;09:00">
+        
+   11, 2019
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="https://mungseok.github.io/categories/linux">linux</a>, 
+    
+      <a class="category-link" href="https://mungseok.github.io/categories/command">command</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <p>한글이 섞여 있는 파일을 <a href="http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation">sort</a>로 정렬할때 결과의 순서가 이상할때가 있다.<br />
+이런경우 <code>LC_COLLATE</code> 환경변수를 바꿔서 한글순서 정렬이 가능하다.</p>
+      
+      <p>
+        <a href="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/" class="postShorten-excerpt_link link"></a>
         
       </p>
     </div>
@@ -327,6 +378,10 @@ if (!doNotTrack) {
 
 <script src="https://mungseok.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
+
+  
+    <script async crossorigin="anonymous" defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+  
 
 <script lang="javascript">
 window.onload = updateMinWidth;
