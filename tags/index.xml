@@ -6,10 +6,55 @@
     <description>Recent content in Tags on mungseok&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 12 Nov 2019 21:06:08 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2019 13:15:14 +0900</lastBuildDate>
     
 	<atom:link href="https://mungseok.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>git</title>
+      <link>https://mungseok.github.io/tags/git/</link>
+      <pubDate>Wed, 27 Nov 2019 13:15:14 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git subtree</title>
+      <link>https://mungseok.github.io/tags/git-subtree/</link>
+      <pubDate>Wed, 27 Nov 2019 13:15:14 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/git-subtree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>https://mungseok.github.io/tags/github/</link>
+      <pubDate>Wed, 27 Nov 2019 13:15:14 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github.io</title>
+      <link>https://mungseok.github.io/tags/github.io/</link>
+      <pubDate>Wed, 27 Nov 2019 13:15:14 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/github.io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://mungseok.github.io/tags/hugo/</link>
+      <pubDate>Wed, 27 Nov 2019 13:15:14 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>typescript</title>

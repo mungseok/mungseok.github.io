@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.59.1 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.60.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="mungseok">
 <meta name="keywords" content="linux, 리눅스, sort, 정렬, collate">
 <meta name="description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
@@ -80,7 +80,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://mungseok.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-full.css" rel="stylesheet" />
+    
+    
+    <link rel="stylesheet" href="https://mungseok.github.io/css/style-in95vo7z3uf0ycjzj5jq1v9uycsbmzqv2ok0pkml2xznx1cvy349okpvr.min.css" />
     
     
 
@@ -262,14 +267,11 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>한글이 섞여 있는 파일을 <a href="http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation">sort</a>로 정렬할때 결과의 순서가 이상할때가 있다.<br />
+              <p>한글이 섞여 있는 파일을 <a href="http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation">sort</a>로 정렬할때 결과의 순서가 이상할때가 있다.<br>
 이런경우 <code>LC_COLLATE</code> 환경변수를 바꿔서 한글순서 정렬이 가능하다.</p>
-
 <p>(<code>LC_ALL</code>은 <code>LC_*</code>계열 환경변수를 모두 바꾸므로 <code>LC_ALL</code>에 설정해도 무방)</p>
-
 <p>한글 UTF-8 기준으로 정렬하려면 <code>LC_COLLATE=&quot;ko_KR.utf8&quot;</code>로 설정하면 된다.</p>
-
-<pre><code class="language-bash"># centos 7.2, GNU coreutils 8.22
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#09f;font-style:italic"># centos 7.2, GNU coreutils 8.22</span>
 
 $ cat text
 바d
@@ -303,7 +305,7 @@ $ sort text
 사m
 다n
 
-$ C_COLLATE=&quot;ko_KR.UTF-8&quot; sort text
+$ <span style="color:#033">C_COLLATE</span><span style="color:#555">=</span><span style="color:#c30">&#34;ko_KR.UTF-8&#34;</span> sort text
 가l
 나j
 다n
@@ -319,7 +321,7 @@ $ C_COLLATE=&quot;ko_KR.UTF-8&quot; sort text
 파h
 하g
 
-$ LC_COLLATE=&quot;C&quot; sort text
+$ <span style="color:#033">LC_COLLATE</span><span style="color:#555">=</span><span style="color:#c30">&#34;C&#34;</span> sort text
 가l
 나j
 다n
@@ -334,11 +336,8 @@ $ LC_COLLATE=&quot;C&quot; sort text
 타c
 파h
 하g
-</code></pre>
-
-<p><code>LC_COLLATE</code>를 <code>C</code>,<code>POSIX</code>로 설정하면 <code>strcmp</code> 기준으로 정렬을 하는데<br />
+</code></pre></div><p><code>LC_COLLATE</code>를 <code>C`,</code>POSIX<code>로 설정하면 </code>strcmp` 기준으로 정렬을 하는데<br>
 한글만 포함된경우 문제가 없으나 영문 대소문자도 아스키코드 기준으로 정렬하니 주의해야 한다.</p>
-
 <pre><code>$ cat en
 a
 C
@@ -362,9 +361,7 @@ D
 a
 b
 d
-</code></pre>
-
-<p>추가로 macOS 에서는 위 <code>LC_COLLCATE=ko_KR.UTF-8</code> 적용이 안되고 <code>C</code>, <code>POSIX</code>로도 안되는데&hellip;<br />
+</code></pre><p>추가로 macOS 에서는 위 <code>LC_COLLCATE=ko_KR.UTF-8</code> 적용이 안되고 <code>C</code>, <code>POSIX</code>로도 안되는데&hellip;<br>
 비정상 locale 값을 적어서 <code>strcmp</code> 기준으로 정렬은 가능하다.</p>
               
             </div>
@@ -589,7 +586,7 @@ d
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://mungseok.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+<script src="https://mungseok.github.io/js/script-xhhuelzltrppygg1bp5rnzxeb8va4xexanfehilco3irnfkfa10wrboc6s.min.js"></script>
 
 
   

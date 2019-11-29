@@ -5,18 +5,16 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.59.1 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="generator" content="Hugo 0.60.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="mungseok">
 <meta name="keywords" content="typescript, 타입스크립트, type guard, 타입 가드">
 <meta name="description" content="
-
 union type인 객체를 사용할떄
 공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
 해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 type guard를 사용하여 안전하게 접근이 가능하다.">
 
 
 <meta property="og:description" content="
-
 union type인 객체를 사용할떄
 공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
 해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 type guard를 사용하여 안전하게 접근이 가능하다.">
@@ -27,12 +25,10 @@ union type인 객체를 사용할떄
 <meta property="twitter:url" content="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/">
 <meta property="og:site_name" content="mungseok&#39;s blog">
 <meta property="og:description" content="
-
 union type인 객체를 사용할떄
 공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
 해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 type guard를 사용하여 안전하게 접근이 가능하다.">
 <meta name="twitter:description" content="
-
 union type인 객체를 사용할떄
 공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
 해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 type guard를 사용하여 안전하게 접근이 가능하다.">
@@ -88,7 +84,12 @@ union type인 객체를 사용할떄
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://mungseok.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-full.css" rel="stylesheet" />
+    
+    
+    <link rel="stylesheet" href="https://mungseok.github.io/css/style-in95vo7z3uf0ycjzj5jq1v9uycsbmzqv2ok0pkml2xznx1cvy349okpvr.min.css" />
     
     
 
@@ -268,186 +269,140 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h1 id="table-of-contents"></h1><nav id="TableOfContents">
-<ul>
-<li><a href="#예제-코드">예제 코드</a></li>
-<li><a href="#type-assertion으로-우회">type assertion으로 우회</a></li>
-<li><a href="#type-guard">type guard</a>
-<ul>
-<li><a href="#using-type-predicates">Using type predicates</a></li>
-<li><a href="#using-the-in-operator">Using the in operator</a></li>
-<li><a href="#typeof-type-guards">typeof type guards</a></li>
-<li><a href="#instanceof-type-guards">instanceof type guards</a></li>
-</ul></li>
-</ul>
-</nav>
-
+              <!-- raw HTML omitted -->
 <p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">union type</a>인 객체를 사용할떄
 공통으로 가지고 있는 프로퍼티가 아닌 프로퍼티를 접근한 경우 typescript 에서 오류를 발생시킨다.
 해당 객체가 실제로 어떤 타입일지 알 수 없기 때문에 발생하는 현상인데(tsc입장에서는 당연한 스펙) 아래에 설명할 <code>type guard</code>를 사용하여 안전하게 접근이 가능하다.</p>
-
-<h1 id="예제-코드">예제 코드</h1>
-
-<pre><code class="language-typescript">function getNumberOrString(): number | string {
-    if (Math.random() &lt; 0.5) {
-        return 100;
-    } else {
-        return &quot;string&quot;;
+<h1 id="-">예제 코드</h1>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">function</span> getNumberOrString()<span style="color:#555">:</span> <span style="color:#078;font-weight:bold">number</span> <span style="color:#555">|</span> <span style="color:#078;font-weight:bold">string</span> {
+    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#366">Math</span>.random() <span style="color:#555">&lt;</span> <span style="color:#f60">0.5</span>) {
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">100</span>;
+    } <span style="color:#069;font-weight:bold">else</span> {
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#c30">&#34;string&#34;</span>;
     }
 }
 
-let numOrStr = getNumberOrString();
-numOrStr.toString(); // 문제 없음
-numOrStr.toUpperCase(); // 오류, toUpperCase가 없을 가능성이 있음 
-</code></pre>
-
-<p>아래의 내용들은 공식 문서의 설명을 간단히 정리한 내용이다.</p>
-
-<h1 id="type-assertion으로-우회">type assertion으로 우회</h1>
-
+<span style="color:#069;font-weight:bold">let</span> numOrStr <span style="color:#555">=</span> getNumberOrString();
+numOrStr.toString(); <span style="color:#09f;font-style:italic">// 문제 없음
+</span><span style="color:#09f;font-style:italic"></span>numOrStr.toUpperCase(); <span style="color:#09f;font-style:italic">// 오류, toUpperCase가 없을 가능성이 있음 
+</span></code></pre></div><p>아래의 내용들은 공식 문서의 설명을 간단히 정리한 내용이다.</p>
+<h1 id="type-assertion-">type assertion으로 우회</h1>
 <p><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions">type assertion</a>으로 프로퍼티 접근을 가능하게 만든후 실제로 프로퍼티가 있는지 테스트를 한 후 실제 프로퍼티에 접근한다. . 구문이 복잡하고 영 깔끔해 보이지 않으므로 아래에 소개되는 진짜 <code>type guard</code>를 쓰는 것이 바람직하다.</p>
-
-<pre><code class="language-typescript">if ((numOrStr as string).toUpperCase) {
-    (numOrStr as string).toUpperCase();
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">if</span> ((numOrStr <span style="color:#069;font-weight:bold">as</span> <span style="color:#078;font-weight:bold">string</span>).toUpperCase) {
+    (numOrStr <span style="color:#069;font-weight:bold">as</span> <span style="color:#078;font-weight:bold">string</span>).toUpperCase();
 }
-</code></pre>
-
-<h1 id="type-guard">type guard</h1>
-
+</code></pre></div><h1 id="type-guard">type guard</h1>
 <p>공식 문서의 설명을 옮기자면 <strong>특정 스코프에서 타입을 보장하도록 런타임 체크를 수행하는 문법</strong>이라고 한다.</p>
-
 <blockquote>
 <p>A type guard is some expression that performs a runtime check that guarantees the type in some scope.</p>
 </blockquote>
-
 <h2 id="using-type-predicates">Using type predicates</h2>
-
 <p><code>parameterName is Type</code>형태의 type predicate를 리턴 타입으로 하는 함수를 만들고 타입체크 결과를 boolean으로 리턴하도록 한다. 이 함수가 true인 if 분기의 스코프에서는 타입을 보장 받는다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">function</span> isString(target: <span style="color:#078;font-weight:bold">number</span> <span style="color:#555">|</span> <span style="color:#078;font-weight:bold">string</span>)<span style="color:#555">:</span> target is <span style="color:#078;font-weight:bold">string</span> <span style="color:#09f;font-style:italic">/* type predicate */</span> {
+    <span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">typeof</span> target <span style="color:#555">==</span> <span style="color:#c30">&#39;string&#39;</span>; <span style="color:#09f;font-style:italic">// 사실 boolean을 리턴한다
+</span><span style="color:#09f;font-style:italic"></span>}
 
-<pre><code class="language-typescript">function isString(target: number | string): target is string /* type predicate */ {
-    return typeof target == 'string'; // 사실 boolean을 리턴한다
+<span style="color:#069;font-weight:bold">if</span> (isString(numOrStr)) {
+    <span style="color:#09f;font-style:italic">// 여기 스코프 안에서는 string이라고 보장
+</span><span style="color:#09f;font-style:italic"></span>    numOrStr.toUpperCase();
 }
-
-if (isString(numOrStr)) {
-    // 여기 스코프 안에서는 string이라고 보장
-    numOrStr.toUpperCase();
-}
-</code></pre>
-
-<p>함수를 바로 사용하지 않고 변수에 할당후 사용할 경우 단순 boolean 변수로 <code>type guard</code>가 아니다</p>
-
-<pre><code class="language-typescript">const resultOfIsString = isString(numOrStr);
-if (resultOfIsString) {
-    numOrStr.toUpperCase(); // 오류 발생
-}
-</code></pre>
-
-<h2 id="using-the-in-operator">Using the in operator</h2>
-
+</code></pre></div><p>함수를 바로 사용하지 않고 변수에 할당후 사용할 경우 단순 boolean 변수로 <code>type guard</code>가 아니다</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">const</span> resultOfIsString <span style="color:#555">=</span> isString(numOrStr);
+<span style="color:#069;font-weight:bold">if</span> (resultOfIsString) {
+    numOrStr.toUpperCase(); <span style="color:#09f;font-style:italic">// 오류 발생
+</span><span style="color:#09f;font-style:italic"></span>}
+</code></pre></div><h2 id="using-the-in-operator">Using the in operator</h2>
 <p><code>in</code> operator의 true 분기에서는 해당 속성이 있는것을 보장하고 false 분기에서는 없는것을 보장 한다고 문서에 적혀있다.
-<code>in</code>으로 검사한 속성만 쓸수 있을꺼 같지만 타입으로 해석 하여 타입내 다른 속성도 접근 가능하다. (아래 테스트 참고)<br />
+<code>in</code>으로 검사한 속성만 쓸수 있을꺼 같지만 타입으로 해석 하여 타입내 다른 속성도 접근 가능하다. (아래 테스트 참고)<br>
 다만 primitive에 대해서는 사용이 불가능하고 any, object type, type parameter에 한해서 사용할 수 있다.</p>
-
-<pre><code class="language-typescript">interface A {
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">interface</span> A {
     a();
     aa();
 }
 
-interface B {
+<span style="color:#069;font-weight:bold">interface</span> B {
     b();
     bb();
 }
 
-function getAOrB(): A | B {
-    if (Math.random() &lt; 0.5) {
-        return {
-            a: () =&gt; {},
-            aa: () =&gt; {},
+<span style="color:#069;font-weight:bold">function</span> getAOrB()<span style="color:#555">:</span> A <span style="color:#555">|</span> B {
+    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#366">Math</span>.random() <span style="color:#555">&lt;</span> <span style="color:#f60">0.5</span>) {
+        <span style="color:#069;font-weight:bold">return</span> {
+            a<span style="color:#555">:</span> () <span style="color:#555">=</span><span style="color:#555">&gt;</span> {},
+            aa<span style="color:#555">:</span> () <span style="color:#555">=</span><span style="color:#555">&gt;</span> {},
         };
-    } else {
-        return {
-            b: () =&gt; {},
-            bb: () =&gt; {},
+    } <span style="color:#069;font-weight:bold">else</span> {
+        <span style="color:#069;font-weight:bold">return</span> {
+            b<span style="color:#555">:</span> () <span style="color:#555">=</span><span style="color:#555">&gt;</span> {},
+            bb<span style="color:#555">:</span> () <span style="color:#555">=</span><span style="color:#555">&gt;</span> {},
         };
     }
 }
 
-const aOrB = getAOrB();
-if (&quot;a&quot; in  aOrB) {
-    aOrB.a(); // in 체크 성공으로 오류 없음
-}
+<span style="color:#069;font-weight:bold">const</span> aOrB <span style="color:#555">=</span> getAOrB();
+<span style="color:#069;font-weight:bold">if</span> (<span style="color:#c30">&#34;a&#34;</span> <span style="color:#069;font-weight:bold">in</span>  aOrB) {
+    aOrB.a(); <span style="color:#09f;font-style:italic">// in 체크 성공으로 오류 없음
+</span><span style="color:#09f;font-style:italic"></span>}
 
-if (&quot;a&quot; in  aOrB) {
-    aOrB.aa(); // a만 체크했지만 타입이 A임을 알기 때문에 오류 없음
-}
+<span style="color:#069;font-weight:bold">if</span> (<span style="color:#c30">&#34;a&#34;</span> <span style="color:#069;font-weight:bold">in</span>  aOrB) {
+    aOrB.aa(); <span style="color:#09f;font-style:italic">// a만 체크했지만 타입이 A임을 알기 때문에 오류 없음
+</span><span style="color:#09f;font-style:italic"></span>}
 
-if (&quot;a&quot; in  aOrB) {
-    aOrB.b(); // 얘는 당연히 안된다
-}
-</code></pre>
+<span style="color:#069;font-weight:bold">if</span> (<span style="color:#c30">&#34;a&#34;</span> <span style="color:#069;font-weight:bold">in</span>  aOrB) {
+    aOrB.b(); <span style="color:#09f;font-style:italic">// 얘는 당연히 안된다
+</span><span style="color:#09f;font-style:italic"></span>}
+</code></pre></div><div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">let</span> numOrStr <span style="color:#555">=</span> getNumberOrString();
 
-<pre><code class="language-typescript">let numOrStr = getNumberOrString();
-
-if ('toUpperCase' in numOrStr) { // 여기서 오류, &quot;The right-hand side of an 'in' expression must be of type 'any', an object type or a type parameter.&quot;
-    numOrStr.toUpperCase();
+<span style="color:#069;font-weight:bold">if</span> (<span style="color:#c30">&#39;toUpperCase&#39;</span> <span style="color:#069;font-weight:bold">in</span> numOrStr) { <span style="color:#09f;font-style:italic">// 여기서 오류, &#34;The right-hand side of an &#39;in&#39; expression must be of type &#39;any&#39;, an object type or a type parameter.&#34;
+</span><span style="color:#09f;font-style:italic"></span>    numOrStr.toUpperCase();
     numOrStr.toLowerCase();
 }
-</code></pre>
-
-<h2 id="typeof-type-guards">typeof type guards</h2>
-
+</code></pre></div><h2 id="typeof-type-guards">typeof type guards</h2>
 <p><code>typeof</code>를 아래 두가지 형태로 사용하여 가드로 사용할 수도 있다.</p>
-
 <ul>
 <li><code>typeof v === &quot;typename&quot;</code></li>
 <li><code>typeof v !== &quot;typename&quot;</code></li>
 </ul>
-
 <p>다만 여기서도 제약이 있는데 typeof로 체크가 가능한 number, string, boolean, symbol에만 쓸 수 있다.
 인터페이스나 클래스는 typeof로 확인이 안되기 때문에 당연한 스펙으로 봐야겠다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">if</span> (<span style="color:#069;font-weight:bold">typeof</span> numOrStr <span style="color:#555">===</span> <span style="color:#c30">&#39;string&#39;</span>) {
+    numOrStr.toUpperCase(); <span style="color:#09f;font-style:italic">// 통과
+</span><span style="color:#09f;font-style:italic"></span>}
 
-<pre><code class="language-typescript">if (typeof numOrStr === 'string') {
-    numOrStr.toUpperCase(); // 통과
-}
-
-if (typeof numOrStr == 'string') {
-    numOrStr.toUpperCase(); // 이것도 통과
-}
-</code></pre>
-
-<h2 id="instanceof-type-guards">instanceof type guards</h2>
-
+<span style="color:#069;font-weight:bold">if</span> (<span style="color:#069;font-weight:bold">typeof</span> numOrStr <span style="color:#555">==</span> <span style="color:#c30">&#39;string&#39;</span>) {
+    numOrStr.toUpperCase(); <span style="color:#09f;font-style:italic">// 이것도 통과
+</span><span style="color:#09f;font-style:italic"></span>}
+</code></pre></div><h2 id="instanceof-type-guards">instanceof type guards</h2>
 <p><code>typeof</code> 에서 구분할 수 없는 object형에 대한 클래스 가드는 <code>instanceof</code>로 확인 할 수 있다.</p>
-
-<pre><code class="language-typescript">class A {
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#069;font-weight:bold">class</span> A {
     a() {}
     aa() {}
 }
 
-class B {
+<span style="color:#069;font-weight:bold">class</span> B {
     b() {}
     bb() {}
 }
 
-function getAOrB(): A | B {
-    if (Math.random() &lt; 0.5) {
-        return new A();
-    } else {
-        return new B();
+<span style="color:#069;font-weight:bold">function</span> getAOrB()<span style="color:#555">:</span> A <span style="color:#555">|</span> B {
+    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#366">Math</span>.random() <span style="color:#555">&lt;</span> <span style="color:#f60">0.5</span>) {
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">new</span> A();
+    } <span style="color:#069;font-weight:bold">else</span> {
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#069;font-weight:bold">new</span> B();
     }
 }
 
-const aOrB = getAOrB();
-if (aOrB instanceof A) {
-    aOrB.a();  // 통과
-    aOrB.aa(); // 통과 
-}
+<span style="color:#069;font-weight:bold">const</span> aOrB <span style="color:#555">=</span> getAOrB();
+<span style="color:#069;font-weight:bold">if</span> (aOrB <span style="color:#069;font-weight:bold">instanceof</span> A) {
+    aOrB.a();  <span style="color:#09f;font-style:italic">// 통과
+</span><span style="color:#09f;font-style:italic"></span>    aOrB.aa(); <span style="color:#09f;font-style:italic">// 통과 
+</span><span style="color:#09f;font-style:italic"></span>}
 
-if (aOrB instanceof A) {
-    aOrB.b();  // 오류 
-}
+<span style="color:#069;font-weight:bold">if</span> (aOrB <span style="color:#069;font-weight:bold">instanceof</span> A) {
+    aOrB.b();  <span style="color:#09f;font-style:italic">// 오류 
+</span><span style="color:#09f;font-style:italic"></span>}
 
-</code></pre>
+</code></pre></div>
               
             </div>
           </div>
@@ -472,7 +427,7 @@ if (aOrB instanceof A) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/git-subtree%EB%A1%9C-hugo-%EC%A0%80%EC%9E%A5%EC%86%8C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0/" data-tooltip="git subtree로 hugo 저장소 관리하기">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -519,7 +474,7 @@ if (aOrB instanceof A) {
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+          <a class="post-action-btn btn btn--default" href="#">
         
           <i class="fa fa-list"></i>
         </a>
@@ -552,7 +507,7 @@ if (aOrB instanceof A) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/git-subtree%EB%A1%9C-hugo-%EC%A0%80%EC%9E%A5%EC%86%8C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0/" data-tooltip="git subtree로 hugo 저장소 관리하기">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -599,7 +554,7 @@ if (aOrB instanceof A) {
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+          <a class="post-action-btn btn btn--default" href="#">
         
           <i class="fa fa-list"></i>
         </a>
@@ -669,7 +624,7 @@ if (aOrB instanceof A) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://mungseok.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+<script src="https://mungseok.github.io/js/script-xhhuelzltrppygg1bp5rnzxeb8va4xexanfehilco3irnfkfa10wrboc6s.min.js"></script>
 
 
   
