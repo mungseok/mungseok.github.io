@@ -6,10 +6,19 @@
     <description>Recent content in linux on mungseok&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 11 Nov 2019 20:38:37 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2019 13:43:33 +0900</lastBuildDate>
     
 	<atom:link href="https://mungseok.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>최근 n개의 로그를 제외한 나머지 로그 삭제하기</title>
+      <link>https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/</link>
+      <pubDate>Mon, 16 Dec 2019 13:43:33 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/</guid>
+      <description>&lt;p&gt;날짜 별로 로그가 생성될때 최근 n개의 로그만 남기고 삭제하는 방법을 정리한다.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>linux sort 에서 한글 정렬 결과가 잘못 나올때</title>
