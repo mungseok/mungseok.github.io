@@ -7,30 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.60.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="mungseok">
-<meta name="keywords" content="linux, 리눅스, sort, 정렬, collate">
-<meta name="description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
-이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta name="keywords" content="tmux, cheat sheet, screen, byobu, 치트 시트, linux, terminal, multiplexer">
+<meta name="description" content="tmux의 주요 사용법을 정리한다.">
 
 
-<meta property="og:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
-이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta property="og:description" content="tmux의 주요 사용법을 정리한다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux sort 에서 한글 정렬 결과가 잘못 나올때">
-<meta name="twitter:title" content="linux sort 에서 한글 정렬 결과가 잘못 나올때">
-<meta property="og:url" content="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
-<meta property="twitter:url" content="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+<meta property="og:title" content="tmux 치트 시트">
+<meta name="twitter:title" content="tmux 치트 시트">
+<meta property="og:url" content="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+<meta property="twitter:url" content="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
 <meta property="og:site_name" content="mungseok&#39;s blog">
-<meta property="og:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
-이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
-<meta name="twitter:description" content="한글이 섞여 있는 파일을 sort로 정렬할때 결과의 순서가 이상할때가 있다.
-이런경우 LC_COLLATE 환경변수를 바꿔서 한글순서 정렬이 가능하다.">
+<meta property="og:description" content="tmux의 주요 사용법을 정리한다.">
+<meta name="twitter:description" content="tmux의 주요 사용법을 정리한다.">
 <meta property="og:locale" content="ko-kr">
 
   
-    <meta property="article:published_time" content="2019-11-11T20:38:37">
+    <meta property="article:published_time" content="2019-12-18T13:14:03">
   
   
-    <meta property="article:modified_time" content="2019-11-11T20:38:37">
+    <meta property="article:modified_time" content="2019-12-18T13:14:03">
   
   
   
@@ -42,9 +38,9 @@
   
   
     
-      <meta property="article:tag" content="linux">
+      <meta property="article:tag" content="tmux">
     
-      <meta property="article:tag" content="command">
+      <meta property="article:tag" content="cheat sheet">
     
   
 
@@ -65,14 +61,14 @@
   <meta property="twitter:image" content="https://mungseok.github.io/images/my_pic.jpeg">
 
 
-    <title>linux sort 에서 한글 정렬 결과가 잘못 나올때</title>
+    <title>tmux 치트 시트</title>
 
     <link rel="icon" href="https://mungseok.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+    <link rel="canonical" href="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -238,15 +234,15 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      linux sort 에서 한글 정렬 결과가 잘못 나올때
+      tmux 치트 시트
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-11-11T20:38:37&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-12-18T13:14:03&#43;09:00">
         
-   11, 2019
+   18, 2019
 
       </time>
     
@@ -267,102 +263,54 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>한글이 섞여 있는 파일을 <a href="http://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation">sort</a>로 정렬할때 결과의 순서가 이상할때가 있다.<br>
-이런경우 <code>LC_COLLATE</code> 환경변수를 바꿔서 한글순서 정렬이 가능하다.</p>
-<p>(<code>LC_ALL</code>은 <code>LC_*</code>계열 환경변수를 모두 바꾸므로 <code>LC_ALL</code>에 설정해도 무방)</p>
-<p>한글 UTF-8 기준으로 정렬하려면 <code>LC_COLLATE=&quot;ko_KR.utf8&quot;</code>로 설정하면 된다.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#09f;font-style:italic"># centos 7.2, GNU coreutils 8.22</span>
-
-$ cat text
-바d
-가l
-자e
-사m
-다n
-하g
-나j
-파h
-타c
-카f
-아i
-차b
-마k
-라a
-
-$ sort text
-라a
-차b
-타c
-바d
-자e
-카f
-하g
-파h
-아i
-나j
-마k
-가l
-사m
-다n
-
-$ <span style="color:#033">C_COLLATE</span><span style="color:#555">=</span><span style="color:#c30">&#34;ko_KR.UTF-8&#34;</span> sort text
-가l
-나j
-다n
-라a
-마k
-바d
-사m
-아i
-자e
-차b
-카f
-타c
-파h
-하g
-
-$ <span style="color:#033">LC_COLLATE</span><span style="color:#555">=</span><span style="color:#c30">&#34;C&#34;</span> sort text
-가l
-나j
-다n
-라a
-마k
-바d
-사m
-아i
-자e
-차b
-카f
-타c
-파h
-하g
-</code></pre></div><p><code>LC_COLLATE</code>를 <code>C</code>, <code>POSIX</code>로 설정하면 <code>strcmp</code> 기준으로 정렬을 하는데<br>
-한글만 포함된경우 문제가 없으나 영문 대소문자도 아스키코드 기준으로 정렬하니 주의해야 한다.</p>
-<pre><code>$ cat en
-a
-C
-D
-b
-A
-d
-
-$ sort en # LC_COLLATE=&quot;en_US.UTF-8&quot;
-a
-A
-b
-C
-d
-D
-
-$ LC_COLLATE='posix' sort en
-A
-C
-D
-a
-b
-d
-</code></pre><p>추가로 macOS 에서는 위 <code>LC_COLLCATE=ko_KR.UTF-8</code> 적용이 안되고 <code>C</code>, <code>POSIX</code>로도 안되는데&hellip;<br>
-비정상 locale 값을 적어서 <code>strcmp</code> 기준으로 정렬은 가능하다.</p>
+              <p>tmux의 주요 사용법을 정리한다.</p>
+<h1 id="command-line-">command line 명령어</h1>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">tmux new -s session_name -n window name     : 새로운 세션을 생성
+tmux attach -t session_name                 : 기존 세션에 붙음(attach)
+tmux ls                                     : 세션 목록
+tmux rename-session -t ori_name new_name    : 세션명 변경
+tmux kill-session -t session_name           : 세션 삭제
+tmux kill-server                            : 서버 삭제 - 모든 세션 삭제
+</code></pre></div><h1 id="tmux--">tmux 내부 커맨드</h1>
+<p>아래에 설명하는 <code>prefix</code>는 <code>ctrl + b</code>을 의미함(기본값)</p>
+<h2 id="common">common</h2>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">prefix + :         : tmux console 
+prefix + s         : 세션 목록 
+prefix + d         : 세션에서 떨어지기<span style="color:#555">(</span>detach<span style="color:#555">)</span>
+prefix + $         : 세션명 변경
+perfix + <span style="color:#555">(</span>         : 이전 세션
+perfix + <span style="color:#555">)</span>         : 다음 세션
+</code></pre></div><h2 id="window">window</h2>
+<p><code>window</code>는 세션 내에서 여러개의 터미널을 전환하면서 사용할 수 있도록 한다.<br>
+<code>vi</code>로 따지자면 버퍼에 가깝다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">prefix + c          : 윈도우 생성 
+prefix + &amp;          : 윈도우 삭제
+prefix + ,          : 윈도우명 변경
+prefix + ${number}  : 윈도우 선택 - 번호 사용
+prefix + n          : 다음 윈도우
+prefix + p          : 이전 윈도우
+prefix + w          : 윈도우 선택기
+</code></pre></div><h2 id="pane">pane</h2>
+<p><code>pane</code>은 윈도우를 분할하여 한화면에 여러 터미널을 볼 수 있게 한다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">prefix + %           : 좌우로 pane 분리
+prefix + &#34;           : 상하로 pane 분리(&#34;)
+prefix + x           : pane 닫기
+prefix + arrow       : pane 이동
+prefix + q           : pane 번호 확인
+prefix + q num       : pane 번호로 이동
+prefix + space       : 기 설정된 layout들로 변경(순환) 
+prefix + o           : 다음 pane
+prefix + ;           : 이전(last) pane
+prefix + alt + arrow : pane 크기 변경
+prefix + !           : pane을 윈도우로 변경 
+prefix + z           : pane 줌(zoom) 토글
+prefix + {           : 현재 pane을 왼쪽으로 이동
+prefix + }           : 현재 pane을 오른쪽으로 이동
+</code></pre></div><h1 id="-">관련 링크</h1>
+<ul>
+<li>치트 시트 : <a href="https://tmuxcheatsheet.com/">https://tmuxcheatsheet.com/</a></li>
+<li>tutorial : <a href="https://leimao.github.io/blog/Tmux-Tutorial/">https://leimao.github.io/blog/Tmux-Tutorial/</a></li>
+</ul>
               
             </div>
           </div>
@@ -374,9 +322,9 @@ d
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/linux/">linux</a>
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/tmux/">tmux</a>
 
-  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/command/">command</a>
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/cheat-sheet/">cheat sheet</a>
 
                   </div>
                 
@@ -389,7 +337,7 @@ d
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/" data-tooltip="typescript의 type guard">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -397,7 +345,7 @@ d
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/" data-tooltip="최근 n개의 로그를 제외한 나머지 로그 삭제하기">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -415,13 +363,13 @@ d
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -469,7 +417,7 @@ d
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/11/typescript%EC%9D%98-type-guard/" data-tooltip="typescript의 type guard">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -477,7 +425,7 @@ d
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/" data-tooltip="최근 n개의 로그를 제외한 나머지 로그 삭제하기">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -495,13 +443,13 @@ d
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/11/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -531,13 +479,13 @@ d
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmungseok.github.io%2F2019%2F11%2Flinux-sort-%25EC%2597%2590%25EC%2584%259C-%25ED%2595%259C%25EA%25B8%2580-%25EC%25A0%2595%25EB%25A0%25AC-%25EA%25B2%25B0%25EA%25B3%25BC%25EA%25B0%2580-%25EC%259E%2598%25EB%25AA%25BB-%25EB%2582%2598%25EC%2598%25AC%25EB%2595%258C%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Ftmux-%25EC%25B9%2598%25ED%258A%25B8-%25EC%258B%259C%25ED%258A%25B8%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fmungseok.github.io%2F2019%2F11%2Flinux-sort-%25EC%2597%2590%25EC%2584%259C-%25ED%2595%259C%25EA%25B8%2580-%25EC%25A0%2595%25EB%25A0%25AC-%25EA%25B2%25B0%25EA%25B3%25BC%25EA%25B0%2580-%25EC%259E%2598%25EB%25AA%25BB-%25EB%2582%2598%25EC%2598%25AC%25EB%2595%258C%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Ftmux-%25EC%25B9%2598%25ED%258A%25B8-%25EC%258B%259C%25ED%258A%25B8%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
@@ -625,9 +573,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/mungseok.github.io\/2019\/11\/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C\/';
+          this.page.url = 'https:\/\/mungseok.github.io\/2019\/12\/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8\/';
           
-            this.page.identifier = '\/2019\/11\/linux-sort-%EC%97%90%EC%84%9C-%ED%95%9C%EA%B8%80-%EC%A0%95%EB%A0%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%9E%98%EB%AA%BB-%EB%82%98%EC%98%AC%EB%95%8C\/'
+            this.page.identifier = '\/2019\/12\/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8\/'
           
         };
         (function() {

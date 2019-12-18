@@ -6,10 +6,19 @@
     <description>Recent content on mungseok&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 16 Dec 2019 13:43:33 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Dec 2019 13:14:03 +0900</lastBuildDate>
     
 	<atom:link href="https://mungseok.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tmux 치트 시트</title>
+      <link>https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/</link>
+      <pubDate>Wed, 18 Dec 2019 13:14:03 +0900</pubDate>
+      
+      <guid>https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/</guid>
+      <description>&lt;p&gt;tmux의 주요 사용법을 정리한다.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>최근 n개의 로그를 제외한 나머지 로그 삭제하기</title>
