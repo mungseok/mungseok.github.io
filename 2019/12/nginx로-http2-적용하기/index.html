@@ -7,40 +7,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.60.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="mungseok">
-<meta name="keywords" content="tmux, cheat sheet, screen, byobu, 치트 시트, linux, terminal, multiplexer">
-<meta name="description" content="tmux의 주요 사용법을 정리한다.">
+<meta name="keywords" content="nginx, http2, complie">
+<meta name="description" content="nginx에 http2 프로토콜 적용하는 방법을 정리한다.">
 
 
-<meta property="og:description" content="tmux의 주요 사용법을 정리한다.">
+<meta property="og:description" content="nginx에 http2 프로토콜 적용하는 방법을 정리한다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tmux 치트 시트">
-<meta name="twitter:title" content="tmux 치트 시트">
-<meta property="og:url" content="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
-<meta property="twitter:url" content="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+<meta property="og:title" content="nginx로 http2 적용하기">
+<meta name="twitter:title" content="nginx로 http2 적용하기">
+<meta property="og:url" content="https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
+<meta property="twitter:url" content="https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
 <meta property="og:site_name" content="mungseok&#39;s blog">
-<meta property="og:description" content="tmux의 주요 사용법을 정리한다.">
-<meta name="twitter:description" content="tmux의 주요 사용법을 정리한다.">
+<meta property="og:description" content="nginx에 http2 프로토콜 적용하는 방법을 정리한다.">
+<meta name="twitter:description" content="nginx에 http2 프로토콜 적용하는 방법을 정리한다.">
 <meta property="og:locale" content="ko-kr">
 
   
-    <meta property="article:published_time" content="2019-12-18T13:14:03">
+    <meta property="article:published_time" content="2019-12-20T13:03:14">
   
   
-    <meta property="article:modified_time" content="2019-12-18T13:14:03">
+    <meta property="article:modified_time" content="2019-12-20T13:03:14">
   
   
   
     
-      <meta property="article:section" content="linux">
-    
-      <meta property="article:section" content="command">
+      <meta property="article:section" content="nginx">
     
   
   
     
-      <meta property="article:tag" content="tmux">
+      <meta property="article:tag" content="nginx">
     
-      <meta property="article:tag" content="cheat sheet">
+      <meta property="article:tag" content="http2">
     
   
 
@@ -61,14 +59,14 @@
   <meta property="twitter:image" content="https://mungseok.github.io/images/my_pic.jpeg">
 
 
-    <title>tmux 치트 시트</title>
+    <title>nginx로 http2 적용하기</title>
 
     <link rel="icon" href="https://mungseok.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+    <link rel="canonical" href="https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -234,15 +232,15 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      tmux 치트 시트
+      nginx로 http2 적용하기
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-12-18T13:14:03&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-12-20T13:03:14&#43;09:00">
         
-   18, 2019
+   20, 2019
 
       </time>
     
@@ -251,9 +249,7 @@ if (!doNotTrack) {
   
     <span></span>
     
-      <a class="category-link" href="https://mungseok.github.io/categories/linux">linux</a>, 
-    
-      <a class="category-link" href="https://mungseok.github.io/categories/command">command</a>
+      <a class="category-link" href="https://mungseok.github.io/categories/nginx">nginx</a>
     
   
 
@@ -263,54 +259,53 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>tmux의 주요 사용법을 정리한다.</p>
-<h1 id="command-line-">command line 명령어</h1>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">tmux new -s session_name -n window name     : 새로운 세션을 생성
-tmux attach -t session_name                 : 기존 세션에 붙음(attach)
-tmux ls                                     : 세션 목록
-tmux rename-session -t ori_name new_name    : 세션명 변경
-tmux kill-session -t session_name           : 세션 삭제
-tmux kill-server                            : 서버 삭제 - 모든 세션 삭제
-</code></pre></div><h1 id="tmux--">tmux 내부 커맨드</h1>
-<p>아래에 설명하는 <code>prefix</code>는 <code>ctrl + b</code>을 의미함(기본값)</p>
-<h2 id="common">common</h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">prefix + :         : tmux console 
-prefix + s         : 세션 목록 
-prefix + d         : 세션에서 떨어지기<span style="color:#555">(</span>detach<span style="color:#555">)</span>
-prefix + $         : 세션명 변경
-perfix + <span style="color:#555">(</span>         : 이전 세션
-perfix + <span style="color:#555">)</span>         : 다음 세션
-</code></pre></div><h2 id="window">window</h2>
-<p><code>window</code>는 세션 내에서 여러개의 터미널을 전환하면서 사용할 수 있도록 한다.<br>
-<code>vi</code>로 따지자면 버퍼에 가깝다.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">prefix + c          : 윈도우 생성 
-prefix + &amp;          : 윈도우 삭제
-prefix + ,          : 윈도우명 변경
-prefix + ${number}  : 윈도우 선택 - 번호 사용
-prefix + n          : 다음 윈도우
-prefix + p          : 이전 윈도우
-prefix + w          : 윈도우 선택기
-</code></pre></div><h2 id="pane">pane</h2>
-<p><code>pane</code>은 윈도우를 분할하여 한화면에 여러 터미널을 볼 수 있게 한다.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">prefix + %           : 좌우로 pane 분리
-prefix + &#34;           : 상하로 pane 분리(&#34;)
-prefix + x           : pane 닫기
-prefix + arrow       : pane 이동
-prefix + q           : pane 번호 확인
-prefix + q num       : pane 번호로 이동
-prefix + space       : 기 설정된 layout들로 변경(순환) 
-prefix + o           : 다음 pane
-prefix + ;           : 이전(last) pane
-prefix + alt + arrow : pane 크기 변경
-prefix + !           : pane을 윈도우로 변경 
-prefix + z           : pane 줌(zoom) 토글
-prefix + {           : 현재 pane을 왼쪽으로 이동
-prefix + }           : 현재 pane을 오른쪽으로 이동
-</code></pre></div><h1 id="-">관련 링크</h1>
+              <p>nginx에 http2 프로토콜 적용하는 방법을 정리한다.</p>
+<h1 id="nginx-">nginx 컴파일</h1>
+<h3 id="heading">다운로드</h3>
+<p>http2 적용을 위해서는 <code>nginx-1.9.5</code> 이상이 필요하다. 최신버전을 다운로드 받고 tar 압축을 풀도록 한다. (작성 시점에는 <code>1.17.6</code>)</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget http://nginx.org/download/nginx-1.17.6.tar.gz
+--2019-12-20 13:09:11--  http://nginx.org/download/nginx-1.17.6.tar.gz
+Resolving nginx.org <span style="color:#555">(</span>nginx.org<span style="color:#555">)</span>...
+......
+100%<span style="color:#555">[</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span><span style="color:#555">=</span>&gt;<span style="color:#555">]</span> 1,037,527    534KB/s   in 1.9s
+2019-12-20 13:09:14 <span style="color:#555">(</span><span style="color:#f60">534</span> KB/s<span style="color:#555">)</span> - ‘nginx-1.17.6.tar.gz’ saved <span style="color:#555">[</span>1037527/1037527<span style="color:#555">]</span>
+$ ls
+nginx-1.17.6.tar.gz
+$ tar xzf nginx-1.17.6.tar.gz
+$ ls
+nginx-1.17.6  nginx-1.17.6.tar.gz
+</code></pre></div><h3 id="heading1">컴파일</h3>
+<p>아래의 두가지 옵션을 추가 하여 <code>configure</code>, <code>make</code>, <code>make install</code>을 수행한다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#033">NGINX_DEST</span><span style="color:#555">=</span>/target/directory
+$ ./configure <span style="color:#c30;font-weight:bold">\
+</span><span style="color:#c30;font-weight:bold"></span>--prefix<span style="color:#555">=</span><span style="color:#033">$NGINX_DEST</span> <span style="color:#c30;font-weight:bold">\
+</span><span style="color:#c30;font-weight:bold"></span>--with-http_ssl_module <span style="color:#c30;font-weight:bold">\
+</span><span style="color:#c30;font-weight:bold"></span>--with-http_v2_module
+$ make -j
+$ make install 
+</code></pre></div><h3 id="--">설정 및 실행</h3>
+<p>http2 및 ssl 설정을 하고 nginx를 실행한다.
+http2를 사용하려면 https(ssl/tls)도 함께 켜줘야 한다. (<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>에서 http2를 쓰겠다고 합의를 봐야함)</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># conf/nginx.conf
+
+server {
+    listen 443 ssl http2;             # ssl(http2)와 http2를 443포트에 적용
+
+    ssl_certificate server.crt;       # ssl 인증서
+    ssl_certificate_key server.key;   # ssl 인증서 키
+}
+</code></pre></div><div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#366">cd</span> <span style="color:#033">$NGINX_DEST</span>
+$ sbin/nginx 
+</code></pre></div><h5 id="--1">관련된 설정 문서</h5>
 <ul>
-<li>치트 시트 : <a href="https://tmuxcheatsheet.com/">https://tmuxcheatsheet.com/</a></li>
-<li>tutorial : <a href="https://leimao.github.io/blog/Tmux-Tutorial/">https://leimao.github.io/blog/Tmux-Tutorial/</a></li>
+<li>기본설정(core) : <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html">http://nginx.org/en/docs/http/ngx_http_core_module.html</a></li>
+<li>ssl : <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html">http://nginx.org/en/docs/http/ngx_http_ssl_module.html</a></li>
+<li>http2 : <a href="http://nginx.org/en/docs/http/ngx_http_v2_module.html">http://nginx.org/en/docs/http/ngx_http_v2_module.html</a></li>
 </ul>
+<h1 id="docker--">docker 이미지 사용</h1>
+<p>docker 이미지를 이용하여 컴파일 과정없이 http2 지원 nginx 사용이 가능하다.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -ti -v <span style="color:#033">$PWD</span>:/usr/share/nginx/html -p 80:80 -p 443:443 stephenyu/nginx-http2-ssl
+</code></pre></div>
               
             </div>
           </div>
@@ -322,9 +317,9 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/tmux/">tmux</a>
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/nginx/">nginx</a>
 
-  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/cheat-sheet/">cheat sheet</a>
+  <a class="tag tag--primary tag--small" href="https://mungseok.github.io/tags/http2/">http2</a>
 
                   </div>
                 
@@ -337,7 +332,7 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/" data-tooltip="nginx로 http2 적용하기">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -345,7 +340,7 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/" data-tooltip="최근 n개의 로그를 제외한 나머지 로그 삭제하기">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/" data-tooltip="tmux 치트 시트">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -363,13 +358,13 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -417,7 +412,7 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/" data-tooltip="nginx로 http2 적용하기">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -425,7 +420,7 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/%EC%B5%9C%EA%B7%BC-n%EA%B0%9C%EC%9D%98-%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%A0%9C%EC%99%B8%ED%95%9C-%EB%82%98%EB%A8%B8%EC%A7%80-%EB%A1%9C%EA%B7%B8-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0/" data-tooltip="최근 n개의 로그를 제외한 나머지 로그 삭제하기">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/" data-tooltip="tmux 치트 시트">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -443,13 +438,13 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://mungseok.github.io/2019/12/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -479,13 +474,13 @@ prefix + }           : 현재 pane을 오른쪽으로 이동
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Ftmux-%25EC%25B9%2598%25ED%258A%25B8-%25EC%258B%259C%25ED%258A%25B8%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Fnginx%25EB%25A1%259C-http2-%25EC%25A0%2581%25EC%259A%25A9%25ED%2595%2598%25EA%25B8%25B0%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Ftmux-%25EC%25B9%2598%25ED%258A%25B8-%25EC%258B%259C%25ED%258A%25B8%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fmungseok.github.io%2F2019%2F12%2Fnginx%25EB%25A1%259C-http2-%25EC%25A0%2581%25EC%259A%25A9%25ED%2595%2598%25EA%25B8%25B0%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
@@ -573,9 +568,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/mungseok.github.io\/2019\/12\/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8\/';
+          this.page.url = 'https:\/\/mungseok.github.io\/2019\/12\/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0\/';
           
-            this.page.identifier = '\/2019\/12\/tmux-%EC%B9%98%ED%8A%B8-%EC%8B%9C%ED%8A%B8\/'
+            this.page.identifier = '\/2019\/12\/nginx%EB%A1%9C-http2-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0\/'
           
         };
         (function() {
